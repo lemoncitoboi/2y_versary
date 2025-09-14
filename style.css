@@ -1,13 +1,12 @@
 /* --- Estilos Generales y Fondos Animados --- */
 :root {
-    --text-color: #2c2c2c; /* Un gris más oscuro para mejor contraste */
-    /* Paleta de colores para el degradado, inspirada en amaneceres */
+    --text-color: #2c2c2c;
     --gradient-c1: #fbc2eb;
     --gradient-c2: #a6c1ee;
     --gradient-c3: #fdcbf1;
     --gradient-c4: #e6dee9;
-    --card-background: rgba(255, 255, 255, 0.65);
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-background: rgba(255, 255, 255, 0.70); /* Un poco menos transparente para legibilidad */
+    --shadow-color: rgba(0, 0, 0, 0.12);
     --accent-color: #6a82fb;
 }
 
@@ -22,17 +21,14 @@ body {
     color: var(--text-color);
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinea al inicio para ver la animación desde el principio */
+    align-items: flex-start;
     min-height: 100vh;
     padding: 4rem 1rem;
-    
-    /* El nuevo fondo animado */
     background: linear-gradient(135deg, var(--gradient-c1), var(--gradient-c2), var(--gradient-c3), var(--gradient-c4));
     background-size: 400% 400%;
     animation: gradientAnimation 20s ease infinite;
 }
 
-/* Animación que mueve el fondo */
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -44,41 +40,27 @@ body {
     max-width: 800px;
     width: 100%;
     background: var(--card-background);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 24px;
     padding: 3rem 4rem;
     box-shadow: 0 16px 40px var(--shadow-color);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* --- NUEVO: Animaciones al hacer scroll --- */
+/* --- NUEVO: Sistema de Animación Universal --- */
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
+    /* Transición suave para cuando se añada la clase .visible */
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Esta clase se usará en el HTML para activar la animación */
-.fade-in-on-scroll {
-    /* Navegadores modernos usarán animación al entrar en la vista */
-    animation: fadeInAnimation linear forwards;
-    animation-timeline: view();
-    animation-range-start: entry 10%;
-    animation-range-end: cover 40%;
+/* El script añadirá esta clase cuando el elemento sea visible */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-@keyframes fadeInAnimation {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 /* --- Tipografía y Texto --- */
 h1 {
@@ -93,7 +75,7 @@ h1 {
 .letter p {
     font-size: 1.1rem;
     line-height: 1.8;
-    font-weight: 400; /* Un poco más de peso para legibilidad */
+    font-weight: 400;
     margin-bottom: 1.5rem;
 }
 
@@ -120,7 +102,7 @@ h1 {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
-/* --- NUEVO: Estilos para el Reproductor de Música --- */
+/* --- Estilos para el Reproductor de Música --- */
 .music-player {
     margin: 3rem 0;
     text-align: center;
@@ -135,7 +117,7 @@ h1 {
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* Proporción 16:9 para videos */
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
     border-radius: 16px;
@@ -160,7 +142,7 @@ footer {
 }
 
 .signature, .final-signature {
-    font-weight: 400; /* Unificamos el peso */
+    font-weight: 400;
 }
 
 /* --- Diseño Responsivo para Teléfonos --- */
